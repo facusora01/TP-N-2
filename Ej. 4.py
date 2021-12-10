@@ -4,8 +4,26 @@ import csv
 #codigo de botellas es 1334, y los vasos 568
 #botella pesan 450g = 0.45kg y cuestan 15 dolares. Vasos pesan 350g = 0.35kg y cuestan 8 dolares
 def direccion_de_pedidos(lista_de_ciudades, contador):
-    print(lista_de_ciudades)
-    pass
+
+    cantidades = []
+
+    for i in lista_de_ciudades:
+        if i not in contador :
+            contador.append(i)
+            cantidades.append(1)
+        else:
+            cantidades[i]+=1
+
+    '''
+    for i in range(len(lista_de_ciudades)):
+        for e in range(len(lista_de_ciudades)):
+            if i != e:
+                if lista_de_ciudades[i] == lista_de_ciudades[e] and lista_de_ciudades[i] not in contador:
+                    contador.append(1)
+                else:
+                    contador.append(2)
+    '''
+    return cantidades
 
 
 def verificar_pedidos(numero_pedido, fecha, cliente, ciudad, provicnia, cod_articulo, color, cantidad, descuento, ordenar, vasos, botellas, ciudad_destino)-> list:
@@ -75,6 +93,8 @@ def main() -> None:
     print(f"fueron", total[0], "vasos, y", total[1], "botellas")
 
     print(verificacion[2])
+
+    print(direccion_pedidos)
     
     
 main()

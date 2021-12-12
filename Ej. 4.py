@@ -1,8 +1,5 @@
-from os import makedirs
-import sys
 import csv
-#codigo de botellas es 1334, y los vasos 568
-#botella pesan 450g = 0.45kg y cuestan 15 dolares. Vasos pesan 350g = 0.35kg y cuestan 8 dolares
+
 
 def leer_csv()-> tuple:
     reader: csv = csv.reader(open(r"C:\\Users\\FacuS\Desktop\\TRABAJOS PRACTICOS\\Trabajo Nº2\\pedidos.csv"), delimiter=",")
@@ -50,7 +47,8 @@ def decisicion_modificacion(total, lectura_csv, vasos, botellas, ciudad_destino)
                 print("-"*100)
     return verificacion
 
-def imprimir_tablero(lectura_csv):
+
+def imprimir_tablero(lectura_csv)-> None:
     for numero_pedido, fecha, cliente, ciudad, provincia, cod_articulo, color, cantidad, descuento in lectura_csv:
   
         if numero_pedido != 'Nro. Pedidio':
@@ -109,7 +107,7 @@ def imprimir_tablero(lectura_csv):
 
         if descuento != ' Descuento':
 
-            descuento = descuento.rjust(len(descuento)+6)
+            descuento = descuento.rjust(len(descuento)+12)
 
         print(numero_pedido,'\t', fecha,"\t", cliente,'\t', ciudad,"\t", provincia,"\t",cod_articulo,"\t", color,"\t", cantidad,"\t", descuento)
 
@@ -138,11 +136,11 @@ def main() -> None:
     vasos: int = 0
     botellas: int = 0
     total: list = [0, 0]
-    
+
     lectura_csv = leer_csv()
     modificacion = decisicion_modificacion(total, lectura_csv[1], vasos, botellas, ciudad_destino)
 
-    
+
     direccion_pedidos: list = direccion_de_pedidos(modificacion[2])
 
 

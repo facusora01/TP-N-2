@@ -18,7 +18,7 @@ def verificar_pedidos(ciudad, cod_articulo, cantidad, vasos, botellas, ciudad_de
     elif cod_articulo == '568':
         vasos+= int(cantidad)
 
-    return vasos, botellas, ciudad_destino
+    return vasos, botellas, ciudad_destino, cantidad
 
 
 def decisicion_modificacion(total, lectura_csv, vasos, botellas, ciudad_destino)-> tuple:
@@ -49,6 +49,69 @@ def decisicion_modificacion(total, lectura_csv, vasos, botellas, ciudad_destino)
                 total[1] += verificacion[1]
                 print("-"*100)
     return verificacion
+
+def imprimir_tablero(lectura_csv):
+    for numero_pedido, fecha, cliente, ciudad, provincia, cod_articulo, color, cantidad, descuento in lectura_csv:
+  
+        if numero_pedido != 'Nro. Pedidio':
+
+            numero_pedido = numero_pedido.center(len(numero_pedido)+5)
+        
+        if fecha != ' Fecha':
+
+            fecha = fecha.rjust(len(fecha)+6)
+        
+        if cliente != ' Cliente':
+
+            cliente = cliente.center(len(cliente))
+        
+        if ciudad == ' Ciudad':
+
+            ciudad = ciudad.rjust(len(ciudad)+1)
+        
+        if ciudad != ' Ciudad':
+
+            if len(cliente) < 16:
+
+                ciudad = ciudad.rjust(len(ciudad)+8)
+
+        if provincia == ' Provincia':
+
+            provincia = provincia.rjust(len(provincia)+1)
+
+        if provincia != ' Provincia':
+
+            if len(cliente) > 16:
+
+                provincia = provincia.rjust(len(provincia)+8)
+            
+            if len(provincia) >= 12:
+
+                provincia = provincia.rjust(len(provincia)+8)
+
+        if cod_articulo != ' Cod. ArtÃ­culo':
+
+            cod_articulo = cod_articulo.center(len(cod_articulo)+6)
+
+        if color != ' Color':
+
+            color = color.rjust(len(color)+9)
+
+        if cantidad != ' Cantidad':
+
+            if color == '         Amarillo' or color == '         Negro':
+
+                cantidad = cantidad.rjust(len(cantidad)+2)
+
+            else:
+                cantidad = cantidad.rjust(len(cantidad)+10,)
+
+
+        if descuento != ' Descuento':
+
+            descuento = descuento.rjust(len(descuento)+6)
+
+        print(numero_pedido,'\t', fecha,"\t", cliente,'\t', ciudad,"\t", provincia,"\t",cod_articulo,"\t", color,"\t", cantidad,"\t", descuento)
 
 
 
@@ -81,51 +144,10 @@ def main() -> None:
 
     
     direccion_pedidos: list = direccion_de_pedidos(modificacion[2])
-    
-    for numero_pedido, fecha, cliente, ciudad, provincia, cod_articulo, color, cantidad, descuento in lectura_csv[1]:
-  
-        if numero_pedido != 'Nro. Pedidio':
 
-            numero_pedido = numero_pedido.center(len(numero_pedido)+5)
-        
-        if fecha != ' Fecha':
 
-            fecha = fecha.rjust(len(fecha)+6)
-        
-        if cliente != ' Cliente':
+    imprimir_tablero(lectura_csv[1])
 
-            cliente = cliente.center(len(cliente))
-
-        if provincia == ' Provincia':
-
-            provincia.rjust(len(provincia)+8)
-
-        if provincia != ' Provincia':
-
-            if len(cliente) < 16:
-
-                provincia = provincia.rjust(len(provincia)+8)
-
-        if cod_articulo != ' Cod. ArtÃ­culo':
-
-            cod_articulo = cod_articulo.center(len(cod_articulo)+6)
-
-        if color != ' Color':
-
-            if color != 'Amarillo':
-
-                color = color.center(len(color)+6)
-
-        if cantidad != ' Cantidad':
-
-            cantidad = cantidad.center(len(cantidad)+6)
-
-        if descuento != ' Descuento':
-
-            descuento = descuento.center(len(descuento)+6)
-
-        print(numero_pedido,'\t', fecha,"\t", cliente,"\t", provincia,"\t",cod_articulo,"\t", color,"\t", cantidad,"\t", descuento)
-    
     
     print("\nfueron", len(lectura_csv[1])-1, "Pedidos")
 

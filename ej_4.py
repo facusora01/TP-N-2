@@ -156,6 +156,3 @@ def main() -> None:
     for i in range(len(direccion_pedidos)):
         
         print(f"Se dirigen", direccion_pedidos[i][1],"a", direccion_pedidos[i][0])
-    
-main()
-

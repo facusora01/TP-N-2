@@ -2,7 +2,7 @@ import csv
 
 
 def leer_csv()-> tuple:
-    reader: csv = csv.reader(open(r"C:\\Users\\FacuS\Desktop\\TRABAJOS PRACTICOS\\Trabajo Nº2\\pedidos.csv"), delimiter=",")
+    reader: csv = csv.reader(open(r"pedidos.csv"), delimiter=",")
     ordenar: list = sorted(reader, reverse = True)
     return reader, ordenar
 
@@ -83,7 +83,7 @@ def imprimir_tablero(lectura_csv)-> None:
 
                 provincia = provincia.rjust(len(provincia)+8)
             
-            if len(provincia) >= 12:
+            elif len(provincia) >= 12:
 
                 provincia = provincia.rjust(len(provincia)+8)
 
@@ -102,14 +102,14 @@ def imprimir_tablero(lectura_csv)-> None:
                 cantidad = cantidad.rjust(len(cantidad)+2)
 
             else:
-                cantidad = cantidad.rjust(len(cantidad)+10,)
+                cantidad = cantidad.rjust(len(cantidad)+10)
 
 
         if descuento != ' Descuento':
 
-            descuento = descuento.rjust(len(descuento)+12)
+            descuento = descuento.rjust(len(descuento)+11)
 
-        print(numero_pedido,'\t', fecha,"\t", cliente,'\t', ciudad,"\t", provincia,"\t",cod_articulo,"\t", color,"\t", cantidad,"\t", descuento)
+        print(numero_pedido,'\t', fecha,"\t", cliente,'\t', ciudad,"\t", provincia,"\t",cod_articulo,"\t", color,"\t", cantidad,'\t', descuento)
 
 
 
@@ -132,6 +132,8 @@ def direccion_de_pedidos(lista_de_ciudades)-> list:
     return lista
 
 def main() -> None:    
+
+    #utilitarios = {'utilitario01': 600, 'utilitario02': 1000, 'utilitario03': 500, 'utilitario04': 2000}
     ciudad_destino: list = []
     vasos: int = 0
     botellas: int = 0

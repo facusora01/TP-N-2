@@ -117,5 +117,3 @@ def main() -> dict:
 			dicc_objetos["Vasos"] = dicc_colores_vasos
 
 	return dicc_objetos
-
-main()

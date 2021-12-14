@@ -1,18 +1,21 @@
 import os
+import inteligencia_artificial as ia
 
-def cantidad_botellas(dicc_botellas: dict):
+def cantidad_botellas(dicc_botellas: dict) -> None:
     valores: dict = dicc_botellas.get("Botellas")
     with open("botellas.txt", "w") as botellas:
         for valor in valores:
             botellas.write(f"{valor} {valores[valor]}")
             botellas.write("\n")
-
-def cantidad_vasos(dicc_vasos: dict):
+    
+def cantidad_vasos(dicc_vasos: dict) -> None:
     valores: dict = dicc_vasos.get("Vasos")
     with open("vasos.txt", "w") as vasos:
         for valor in valores:
             vasos.write(f"{valor} {valores[valor]}")
             vasos.write("\n")
 
-# esto es asumiendo esta estructura (se puede adaptar): 
-# cantidad_botellas({'Vasos': {'Negro': 2, 'Azul': 0}, 'Botellas': {'Amarillo': 2, 'Rojo': 0, 'Azul': 1, 'Negro': 0, 'Verde': 0}})
+def main() -> None:
+    dicc_objetos: dict = ia.main()
+    cantidad_botellas(dicc_objetos)
+    cantidad_vasos(dicc_objetos)

@@ -2,8 +2,10 @@ import Ejercicio_1 as ej1
 import ej_4 as ej4
 import TPAlgoritmos2 as ej5y6
 import Ej_7 as ej7
+import inteligencia_artificial as ia
 
 def main() -> None: 
+    ia.main()
     opciones: dict = {1: "Alta, baja y modificacion de pedidos",
                       2: "Generar recorrido",
                       3: "Procesar pedidos",
@@ -35,9 +37,8 @@ def main() -> None:
             ej1.espacio()
             ej5y6.articuloMasPedidosYMasEntregados()
         if (eleccion == 7):
-            ej1.espacio(9)
-            ej7.cantidad_botellas(dicc_botellas)
-            ej7.cantidad_vasos(dicc_vasos)
+            ej1.espacio()
+            ej7.main()
         if (eleccion == 8):
             ej1.espacio()
             print("Gracias! Vuelva pronto\n")

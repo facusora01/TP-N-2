@@ -1,0 +1,16 @@
+astroid==2.8.3
+colorama==0.4.4
+geographiclib==1.52
+geopy==2.2.0
+isort==5.9.3
+lazy-object-proxy==1.6.0
+mccabe==0.6.1
+mypy==0.910
+mypy-extensions==0.4.3
+numpy==1.21.4
+opencv-contrib-python==4.5.4.60
+platformdirs==2.4.0
+pylint==2.11.1
+toml==0.10.2
+typing-extensions==3.10.0.2
+wrapt==1.13.2

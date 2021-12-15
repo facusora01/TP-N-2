@@ -48,5 +48,3 @@ def articuloMasPedidosYMasEntregados():
             pass
     
     print(f"El articulo más pedido es el numero {max(articulos, key=articulos.get)} con {articulos[max(articulos, key=articulos.get)]} unidades entregadas")
-
-articuloMasPedidosYMasEntregados()

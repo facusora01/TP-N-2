@@ -26,6 +26,8 @@ def pedidosRosarinos():
             except IndexError:
                 pass
 
+pedidosRosarinos()
+
 # 6 - Cuál es el artículo más pedido y cuántos de ellos fueron entregados. 
 
 def articuloMasPedidosYMasEntregados():

@@ -14,7 +14,7 @@ def lectura_del_csv()-> list:
 
     with open(r"pedidos.csv") as archivo:
         ciudad: csv = csv.reader(archivo, delimiter=',')
-    
+        next(ciudad)
         lista_de_ciudades: list = []
         
         for ciudades in ciudad:
@@ -32,7 +32,7 @@ def geolocalizacion(ciudades)-> list:
     # luego se hace un sorted() para organizar las ciudades de las mas cercana a la mas lejana. Devolviendo una lista ya organizada.
 
 
-    ciudades.pop(0)
+    
     geolocalizador: nominatim = Nominatim(user_agent="TP_2")
     
 

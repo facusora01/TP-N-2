@@ -80,8 +80,9 @@ def baja_pedidos(pedidos: list) -> list:
         u.espacio()
         numero_pedido: str = str(u.input_numerico("Ingrese el numero de pedido: "))
         for fila in pedidos:
-            if (fila[0] == numero_pedido):
-                no_existe = False
+            if fila:
+                if (fila[0] == numero_pedido):
+                    no_existe = False
         if (no_existe):
             u.espacio()
             print("No se encuentra el numero de pedido, intente nuevamente:")
@@ -96,8 +97,9 @@ def baja_pedidos(pedidos: list) -> list:
     if continuar == "1":
         return True
     for fila in pedidos:
-        if (fila[0] == numero_pedido and fila[5] == cod_articulo and fila[6] == color):
-            pedidos.remove(fila)
+        if fila:
+            if (fila[0] == numero_pedido and fila[5] == cod_articulo and fila[6] == color):
+                pedidos.remove(fila)
 
 def mostrar_menu(pedidos: list) -> None:
     """
@@ -127,9 +129,9 @@ def lectura_csv() -> list:
     Lee el csv y lo devuelve en forma de lista
     """
     with open('pedidos.csv', 'r') as archivo:
-        leer = csv.reader(archivo)
-        pedidos_temporal = list(leer)
-    pedidos = pedidos_temporal
+        leer: csv = csv.reader(archivo)
+        pedidos_temporal: list = list(leer)
+    pedidos: list = pedidos_temporal
     return pedidos
 
 def limpiar_csv() -> None:
@@ -145,9 +147,10 @@ def escribir_csv(pedidos: list) -> None:
     Reescribe linea a linea el csv ya limpio de informacion
     """
     with open('pedidos.csv', 'w', newline='') as archivo:
-        writer = csv.writer(archivo)
+        writer: csv = csv.writer(archivo)
         for fila in pedidos:
-            writer.writerow(fila)
+            if fila: 
+                writer.writerow(fila)
 
 def abm_pedidos() -> None:
     """

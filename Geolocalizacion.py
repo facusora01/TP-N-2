@@ -1,6 +1,6 @@
 import csv
-from geopy.geocoders import Nominatim
-from geopy import distance
+from geopy.geocoders import Nominatim, nominatim
+from geopy import distance, location
 
 #Constantes:
 
@@ -33,7 +33,7 @@ def geolocalizacion(ciudades)-> list:
 
 
     ciudades.pop(0)
-    geolocalizador = Nominatim(user_agent="TP_2")
+    geolocalizador: nominatim = Nominatim(user_agent="TP_2")
     
 
     distancia_de_ciudades: list = []
@@ -43,7 +43,7 @@ def geolocalizacion(ciudades)-> list:
 
     for i in range(len(ciudades)):
 
-        localidad = geolocalizador.geocode(ciudades[i])
+        localidad: location = geolocalizador.geocode(ciudades[i])
         ubicacion: tuple = (localidad.latitude, localidad.longitude)
         distancia_ciudad: int = (distance.distance(ubicacion, COORDENADAS_DE_EMPRESA).km)
         distancia_de_ciudades.append(distancia_ciudad)

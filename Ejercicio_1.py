@@ -160,5 +160,3 @@ def abm_pedidos() -> None:
     mostrar_menu(lista_pedidos)
     limpiar_csv()
     escribir_csv(lista_pedidos)
-
-abm_pedidos()

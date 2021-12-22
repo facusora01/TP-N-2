@@ -158,6 +158,9 @@ def imprimir_txt(recorrido: list, peso_por_zonas: dict, info_utilitarios: dict) 
                 f.write(linea)
 
 def imprimir_recorrido_zona(recorrido: list) -> None:
+    """
+    Solicita al usuario el nombre de la zona para mostrar su respectivo recorrido
+    """
     #u.espacio()
     lista_zonas: dict = {"Zona Norte": recorrido[0], "Zona Sur": recorrido[1], "Zona Centro": recorrido[2], "Zona CABA": recorrido[3]}
     eleccion_zona: str = input("Ingrese la zona del recorrido a mostrar: ")

@@ -115,13 +115,29 @@ def ordenando_pedidos(pedidos) -> dict:
         lector_csv = csv.reader(pedidos_csv, delimiter=',')
         next(lector_csv)
         for row in lector_csv:
-            if row[0] not in pedidos:
-                pedidos[row[0]] = [(row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8])]
-            else:
-                pedidos[row[0]].append((row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]))
+            if row:
+                if row[0] not in pedidos:
+                    pedidos[row[0]] = [(row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8])]
+                else:
+                    pedidos[row[0]].append((row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]))
 
     return pedidos
 
+def imprimir_txt(recorrido: list, peso_por_zonas: dict, info_utilitarios: dict):
+    texto: list = []
+    contador_principal: int = 0
+    for pesozona in peso_por_zonas:
+        texto.append(pesozona)
+        for utilitario in info_utilitarios:
+            if (info_utilitarios[utilitario[0]] == pesozona):
+                texto.append(utilitario)
+        texto.append(peso_por_zonas[pesozona])
+        texto.append(recorrido[contador_principal])
+
+    with open('salida.txt', 'w') as f:
+        for linea in texto:
+            f.write(linea)
+            f.write('\n')
 def main() -> None:
     """
     PRE: no recibe nada
@@ -145,5 +161,7 @@ def main() -> None:
             zonas(GEOLOCALIZADOR, pedido, norte, sur, centro, caba, f"{pedido[2]}, {pedido[3]}, Argentina", dicc_zonas)
     
     recorrido: list = ciudades(dicc_zonas, ciudades_norte, ciudades_sur, ciudades_centro, ciudades_caba)
-    peso_zonas(dicc_zonas, dicc_pesos)
-    utilitarios(dicc_pesos)
+    peso_por_zona: dict = peso_zonas(dicc_zonas, dicc_pesos)
+    info_utilitarios: dict = utilitarios(dicc_pesos)
+
+main()

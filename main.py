@@ -1,9 +1,6 @@
-from geopy.geocoders import nominatim
 import utils as u
-from geopy import Nominatim, location
-from geopy import distance
+from geopy import Nominatim, location, distance
 import csv
-from os import close
 import cv2
 import numpy as np
 import os

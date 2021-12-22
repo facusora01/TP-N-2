@@ -4,7 +4,7 @@ from geopy import distance, location
 
 #Constantes:
 
-#decidimos por poner nuestra Cede en La Plata
+#decidimos por poner nuestra sede en La Plata
 COORDENADAS_DE_EMPRESA: tuple = (-34.9204529,-57.9881899)
 
 
@@ -28,7 +28,7 @@ def lectura_del_csv()-> list:
 def geolocalizacion(ciudades)-> list:
 
     #PRE: Recibe como parametros una lista con las ciudades de los envios
-    #POST: Se hace un for, para especificar que las ciudades son de Argentina, luego en , otro for, revisa cada distancia de cada ciudad conrespecto a la ubicacion de la cede,
+    #POST: Se hace un for, para especificar que las ciudades son de Argentina, luego en , otro for, revisa cada distancia de cada ciudad conrespecto a la ubicacion de la sede,
     # luego se hace un sorted() para organizar las ciudades de las mas cercana a la mas lejana. Devolviendo una lista ya organizada.
 
 

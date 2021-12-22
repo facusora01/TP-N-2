@@ -238,10 +238,10 @@ def main() -> None:
             ej4.main()
         if (eleccion == 5):
             u.espacio()
-            ej5y6.pedidosRosarinos()
+            ej5y6.pedidos_a_ciudad()
         if (eleccion == 6):
             u.espacio()
-            ej5y6.articuloMasPedidosYMasEntregados()
+            ej5y6.articulo_mas_pedido_y_entregados()
         if (eleccion == 7):
             u.espacio()
             ia.main()

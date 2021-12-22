@@ -59,8 +59,11 @@ def utilitarios(dicc_pesos: dict) -> dict:
 
     return dicc_utilitarios
 
-def geolocalizacion(lista_ciudades):
-
+def geolocalizacion(lista_ciudades: list) -> list:
+    """
+    PRE: recibe una lista de ciudades
+    POST: devuelve una lista con la ciudades y las distancias a la sede
+    """
     distancia_de_ciudades: list = []
 
     for ciudad in range(len(lista_ciudades)):
@@ -68,7 +71,7 @@ def geolocalizacion(lista_ciudades):
 
     for i in range(len(lista_ciudades)):
 
-        localidad = GEOLOCALIZADOR.geocode(lista_ciudades[i])
+        localidad: location = GEOLOCALIZADOR.geocode(lista_ciudades[i])
         ubicacion: tuple = (localidad.latitude, localidad.longitude)
         distancia_ciudad: int = (distance.distance(ubicacion, COORDENADAS_DE_EMPRESA).km)
         distancia_de_ciudades.append(distancia_ciudad)
@@ -88,7 +91,7 @@ def ciudades(dicc_zonas: dict, ciudades_norte: list, ciudades_sur: list, ciudade
         for pedido in zona:    
             lista_ciudades.append(pedido[2])
 
-    distancia_de_ciudades = geolocalizacion(lista_ciudades)
+    distancia_de_ciudades: list = geolocalizacion(lista_ciudades)
 
     for ciudad in distancia_de_ciudades:
         for itemzona in dicc_zonas["Zona Norte"]:
@@ -123,7 +126,11 @@ def ordenando_pedidos(pedidos) -> dict:
 
     return pedidos
 
-def imprimir_txt(recorrido: list, peso_por_zonas: dict, info_utilitarios: dict):
+def imprimir_txt(recorrido: list, peso_por_zonas: dict, info_utilitarios: dict) -> None:
+    """
+    PRE: recibe una lista con todos los recorridos y dos diccionarios del peso y los utilitarios
+    POST: genera la salida.txt con los recorridos en orden
+    """
     texto: list = []
     contador_principal: int = 0
     for pesozona in peso_por_zonas:
@@ -162,7 +169,7 @@ def main() -> None:
     ciudades_sur: list = []
     ciudades_centro: list = []
     ciudades_caba: list = []
-    dicc_pesos: dict = {"Zona Norte": 0, "Zona Centro": 0, "Zona Sur": 0, "CABA": 0} #contador
+    dicc_pesos: dict = {"Zona Norte": 0, "Zona Sur": 0, "Zona Centro": 0, "CABA": 0} #contador
     pedidos_ordenados: dict = ordenando_pedidos(pedidos)
     for datos in pedidos_ordenados.values():
         for pedido in datos:

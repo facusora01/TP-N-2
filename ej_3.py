@@ -131,7 +131,7 @@ def imprimir_txt(recorrido: list, peso_por_zonas: dict, info_utilitarios: dict):
         for utilitario in info_utilitarios:
             if (info_utilitarios[utilitario[0]] == pesozona):
                 texto.append(utilitario)
-        texto.append(peso_por_zonas[pesozona])
+        texto.append(peso_por_zonas[str(pesozona)])
         texto.append(recorrido[contador_principal])
 
     with open('salida.txt', 'w') as f:

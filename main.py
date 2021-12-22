@@ -1,6 +1,3 @@
-import Ejercicio_1 as ej1
-import TPAlgoritmos2 as ej5y6
-import inteligencia_artificial as ia
 import utils as u
 from geopy import Nominatim, location
 from geopy import distance
@@ -9,7 +6,6 @@ from os import close
 import cv2
 import numpy as np
 import os
-import time
 from utils import csv_a_lista
 
 PESO_BOTELLAS: int = 0.45
@@ -26,7 +22,7 @@ MINIMO_PREDICCION: int = 0.3
 
 # 5 - Determinar cuáles fueron los pedidos que fueron a la ciudad de Rosario y valorizarlos. 
 
-def pedidos_a_ciudad(ciudad: str) -> None:
+def pedidos_a_ciudad() -> None:
     """ Determina cuáles fueron los pedidos que fueron a la ciudad indicada por parametro y los valoriza.
     PRE: Recibe el nombre de una ciudad en formato string.
     """
@@ -35,10 +31,10 @@ def pedidos_a_ciudad(ciudad: str) -> None:
     PRECIO_BOTELLA_1334: int = 15
     PRECIO_BOTELLA_568: int = 8
 
-    print(f"Los pedidos a {ciudad} fueron:")
+    print(f"Los pedidos a Rosario fueron:")
     for fila in DATA:
         if fila != DATA[0] and fila != []:
-            if fila[3] == ciudad:
+            if fila[3] == "Rosario":
                 print(f"El pedido número {fila[0]} de la fecha {fila[1]} con {fila[7]} unidades del articulo numero {fila[5]} de color {fila[6]}.")
                 if fila[5] == "1334":
                     precio_pedido = int(fila[7]) * PRECIO_BOTELLA_1334

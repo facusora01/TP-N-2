@@ -151,6 +151,7 @@ def imprimir_txt(recorrido: list, peso_por_zonas: dict, info_utilitarios: dict):
                 f.write(linea)
 
 def imprimir_recorrido_zona(recorrido: list) -> None:
+    lista_zonas: list = ["Zona "]
 
 def main() -> None:
     """

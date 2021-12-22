@@ -45,13 +45,19 @@ def decisicion_modificacion(total, lectura_csv, vasos, botellas, ciudad_destino)
             desicion: str = input("\n\nDesea modificar la cantidad del pedido?\n(Presione 'y', si asi lo desea, sino presione 'Enter): ")
             
             if desicion == 'y':
-                cantidad: int = int(input("Escriba la nueva cantidad: "))
-                print("")
-                
-                contador: list = contador_vasos_botellas(fila[3], fila[5], cantidad, vasos, botellas, ciudad_destino)
-                total[0] += contador[0]
-                total[1] += contador[1]
-                print("-"*100)
+                try:
+                    cantidad: int = int(input("Escriba la nueva cantidad: "))
+                    print("")
+                    
+                    contador: list = contador_vasos_botellas(fila[3], fila[5], cantidad, vasos, botellas, ciudad_destino)
+                    total[0] += contador[0]
+                    total[1] += contador[1]
+                    print("-"*100)
+
+                except ValueError:
+                    print('')
+                    print("Ese valor no es un numero")
+                    print('')
             
             else:
                 

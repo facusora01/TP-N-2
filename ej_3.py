@@ -129,7 +129,7 @@ def imprimir_txt(recorrido: list, peso_por_zonas: dict, info_utilitarios: dict):
     for pesozona in peso_por_zonas:
         texto.append(pesozona)
         for utilitario in info_utilitarios:
-            if (info_utilitarios[utilitario[0]] == pesozona):
+            if (info_utilitarios[utilitario][0] == pesozona):
                 texto.append(utilitario)
         texto.append(peso_por_zonas[str(pesozona)])
         texto.append(recorrido[contador_principal])
@@ -138,6 +138,7 @@ def imprimir_txt(recorrido: list, peso_por_zonas: dict, info_utilitarios: dict):
         for linea in texto:
             f.write(linea)
             f.write('\n')
+
 def main() -> None:
     """
     PRE: no recibe nada
@@ -163,5 +164,6 @@ def main() -> None:
     recorrido: list = ciudades(dicc_zonas, ciudades_norte, ciudades_sur, ciudades_centro, ciudades_caba)
     peso_por_zona: dict = peso_zonas(dicc_zonas, dicc_pesos)
     info_utilitarios: dict = utilitarios(dicc_pesos)
+    imprimir_txt(recorrido, peso_por_zona, info_utilitarios)
 
 main()

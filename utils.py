@@ -1,3 +1,11 @@
+import csv
+
+def csv_a_lista() -> list:
+    with open('pedidos.csv', 'r') as archivo:
+            leer: csv = csv.reader(archivo)
+            lista: list = list(leer)
+    return lista
+  
 def input_numerico(texto: str) -> int:
     """
     Solicita un valor con el texto cargado en el argumento y mientras el valor no sea numerico, no termina el proceso.

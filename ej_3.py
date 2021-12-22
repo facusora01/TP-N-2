@@ -134,14 +134,18 @@ def imprimir_txt(recorrido: list, peso_por_zonas: dict, info_utilitarios: dict):
         texto.append(str(peso_por_zonas[pesozona]) + " Kg")
         texto.append(recorrido[contador_principal])
         contador_principal += 1
-        
+
     with open('salida.txt', 'w') as f:
         for linea in texto:
             if (type(linea) == list):
                 f.write("\n")
+                len_maximo = len(linea)
+                contador: int = 1
                 for mini_linea in linea:
                     f.write(mini_linea)
-                    f.write(", ")
+                    if (not contador == len_maximo):
+                        f.write(", ")
+                        contador += 1
             else:
                 f.write('\n')
                 f.write(linea)

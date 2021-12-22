@@ -156,7 +156,7 @@ def imprimir_txt(recorrido: list, peso_por_zonas: dict, info_utilitarios: dict) 
             else:
                 f.write('\n')
                 f.write(linea)
-                
+
 def imprimir_recorrido_zona(recorrido: list) -> None:
     """
     Solicita al usuario el nombre de la zona para mostrar su respectivo recorrido
@@ -197,5 +197,3 @@ def main() -> None:
     peso_por_zona: dict = peso_zonas(dicc_zonas, dicc_pesos)
     info_utilitarios: dict = utilitarios(dicc_pesos)
     imprimir_txt(recorrido, peso_por_zona, info_utilitarios)
-
-main()

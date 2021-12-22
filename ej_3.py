@@ -131,18 +131,20 @@ def imprimir_txt(recorrido: list, peso_por_zonas: dict, info_utilitarios: dict):
         for utilitario in info_utilitarios:
             if (info_utilitarios[utilitario][0] == pesozona):
                 texto.append(utilitario)
-        texto.append(str(peso_por_zonas[pesozona]))
+        texto.append(str(peso_por_zonas[pesozona]) + " Kg")
         texto.append(recorrido[contador_principal])
+        contador_principal += 1
 
     with open('salida.txt', 'w') as f:
         for linea in texto:
             if (type(linea) == list):
+                f.write("\n")
                 for mini_linea in linea:
                     f.write(mini_linea)
                     f.write(", ")
             else:
-                f.write(linea)
                 f.write('\n')
+                f.write(linea)
 
 def main() -> None:
     """

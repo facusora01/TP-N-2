@@ -1,3 +1,4 @@
+from geopy.geocoders import nominatim
 import utils as u
 from geopy import Nominatim, location
 from geopy import distance
@@ -7,6 +8,8 @@ import cv2
 import numpy as np
 import os
 from utils import csv_a_lista
+
+# Constantes
 
 PESO_BOTELLAS: int = 0.45
 PESO_VASOS: int = 0.35
@@ -18,9 +21,8 @@ AZUL_HSV: list = [[90, 50, 70], [128, 255, 255]]
 VERDE_HSV: list = [[36, 50, 70], [89, 255, 255]]
 NEGRO_HSV: list = [[0, 0, 0], [180, 255, 30]]
 MINIMO_PREDICCION: int = 0.3
-
-
-# 5 - Determinar cuáles fueron los pedidos que fueron a la ciudad de Rosario y valorizarlos. 
+PRECIO_BOTELLA_1334: int = 15
+PRECIO_BOTELLA_568: int = 8
 
 def pedidos_a_ciudad() -> None:
     """ Determina cuáles fueron los pedidos que fueron a la ciudad indicada por parametro y los valoriza.
@@ -28,8 +30,6 @@ def pedidos_a_ciudad() -> None:
     """
 
     DATA: list = csv_a_lista()
-    PRECIO_BOTELLA_1334: int = 15
-    PRECIO_BOTELLA_568: int = 8
 
     print(f"Los pedidos a Rosario fueron:")
     for fila in DATA:
@@ -43,9 +43,6 @@ def pedidos_a_ciudad() -> None:
                 porcentajeDescuento: int = int(fila[8])
                 descuento: float = precio_pedido * (porcentajeDescuento / 100)
                 print(f"Costo: ${precio_pedido - descuento}")
-
-
-# 6 - Cuál es el artículo más pedido y cuántos de ellos fueron entregados. 
 
 def articulo_mas_pedido_y_entregados() -> None:
     """ Determina cual fue el articulo más pedido y cuántos de este fueron entregados.
@@ -61,8 +58,6 @@ def articulo_mas_pedido_y_entregados() -> None:
                 articulos[f"{fila[5]} ({fila[6]})"] = int(fila[7])
     
     print(f"El articulo más pedido es el numero {max(articulos, key=articulos.get)} con {articulos[max(articulos, key=articulos.get)]} unidades entregadas")
-
-
 
 def alta_pedidos(pedidos: list) -> list:
     """
@@ -131,7 +126,7 @@ def modificacion_pedidos(pedidos: list) -> list:
                     if (fila[0] == numero_pedido and fila[5] == cod_articulo and fila[6] == color):
                         fila[eleccion - 1] = cambio
         else:
-            modificando = False
+            modificando: bool = False
 
 def baja_pedidos(pedidos: list) -> list:
     """
@@ -222,7 +217,6 @@ def abm_pedidos() -> None:
     mostrar_menu(lista_pedidos)
     limpiar_csv()
     escribir_csv(lista_pedidos)
-
 
 def cargar_red() -> tuple:
 	"""
@@ -375,7 +369,6 @@ def objetos() -> dict:
 
 	return dicc_objetos
 
-
 def cantidad_botellas(dicc_objetos: dict) -> None:
 	"""
 	PRE: recibe un diccionario con los objetos por parametro
@@ -407,7 +400,6 @@ def main_ia() -> None:
 	cantidad_botellas(dicc_objetos)
 	cantidad_vasos(dicc_objetos)
 
-
 def leer_csv()-> tuple:
 
     #POST: Lee el .csv, y devuelve la informacion que traía dentro
@@ -418,7 +410,7 @@ def leer_csv()-> tuple:
 
     return pedidos_temporal
 
-def contador_vasos_botellas(ciudad, cod_articulo, cantidad, vasos, botellas, ciudad_destino)-> tuple:
+def contador_vasos_botellas(ciudad: str, cod_articulo: str, cantidad: str, vasos: int, botellas: int, ciudad_destino: list)-> tuple:
 
     #PRE: Recibe como paramteros: la ciudad, el cod. del articulo y la cant. del envio. Ademas de 3 listas vacias (vasos, botellas, ciudad_destino)
     #POST: hace un append de cada ciudad a una de las listas vacias. Luego, verifica el contenido y la cant. de cada envio, para luego devolver esos datos
@@ -432,8 +424,7 @@ def contador_vasos_botellas(ciudad, cod_articulo, cantidad, vasos, botellas, ciu
 
     return vasos, botellas, ciudad_destino, cantidad
 
-
-def decisicion_modificacion(total, lectura_csv, vasos, botellas, ciudad_destino)-> tuple:
+def decisicion_modificacion(total: list, lectura_csv: list, vasos: int, botellas: int, ciudad_destino: list)-> tuple:
 
     #PRE: Recibe como parametros: una lista vacia, la info del .csv, y 3 listas vacias
     #POST: Se crea un for simplemente para remover una lista vacia, luego se crea otro for donde se le preg. al usuario si quiere cambiar la cant. del pedido de cada uno
@@ -443,30 +434,24 @@ def decisicion_modificacion(total, lectura_csv, vasos, botellas, ciudad_destino)
         if [] in lectura_csv: 
             lectura_csv.remove([])
     print("")
+
     for fila in lectura_csv:
-
         print(fila[0],"\t", fila[1],"\t", fila[2],"\t", fila[3],"\t",fila[4],"\t", fila[5],"\t", fila[6],"\t", fila[7])
-
         if not 'Cantidad' in fila[7]:
             desicion: str = input("\n\nDesea modificar la cantidad del pedido?\n(Presione 'y', si asi lo desea, sino presione 'Enter): ")
-            
             if desicion == 'y':
                 try:
                     cantidad: int = int(input("Escriba la nueva cantidad: "))
-                    print("")
-                    
+                    print("")                   
                     contador: list = contador_vasos_botellas(fila[3], fila[5], cantidad, vasos, botellas, ciudad_destino)
                     total[0] += contador[0]
                     total[1] += contador[1]
                     print("-"*100)
-
                 except ValueError:
                     print('')
                     print("Ese valor no es un numero")
                     print('')
-            
             else:
-                
                 contador: list = contador_vasos_botellas(fila[3], fila[5], fila[7], vasos, botellas, ciudad_destino)
                 total[0] += contador[0]
                 total[1] += contador[1]
@@ -474,23 +459,18 @@ def decisicion_modificacion(total, lectura_csv, vasos, botellas, ciudad_destino)
 
     return contador
 
-
-def imprimir_tablero(lectura_csv)-> None:
+def imprimir_tablero(lectura_csv: list)-> None:
 
     #PRE: Recibe como parametros los datos del .csv
     #POST: Se encarga de imprimir el tablero. No devuelve nada
 
     for fila in lectura_csv:
         if not 'Nro. Pedidio' in fila[0]:
-
             print('\t'.join(str(x) for x in fila))
-        
         else:
             print(' '.join(str(x) for x in fila))
             
-
-
-def direccion_de_pedidos(ciudades_de_pedidos)-> list:
+def direccion_de_pedidos(ciudades_de_pedidos: list)-> list:
 
     #PRE: Recibe como parametros: una lista con todas las ciudades de los pedidos
     #POST: se crea una lista de listas con cada ciudad, y un contador de cuantos envios van para cada ciudad
@@ -513,7 +493,6 @@ def direccion_de_pedidos(ciudades_de_pedidos)-> list:
 
 def main_ej4() -> None:    
 
-    
     ciudad_destino: list = []
     vasos: int = 0
     botellas: int = 0
@@ -522,21 +501,14 @@ def main_ej4() -> None:
     lectura_csv: list = leer_csv()
     modificacion: tuple = decisicion_modificacion(total, lectura_csv, vasos, botellas, ciudad_destino)
 
-
     direccion_pedidos: list = direccion_de_pedidos(modificacion[2])
 
-
     imprimir_tablero(lectura_csv)
-
-    
     print("\nfueron", len(lectura_csv)-1, "Pedidos")
-
     print(f"fueron", total[0], "vasos, y", total[1], "botellas")
 
     for i in range(len(direccion_pedidos)):
-        
         print(f"Se dirigen", direccion_pedidos[i][1],"a", direccion_pedidos[i][0])
-
 
 def zonas(geolocator, pedido: tuple, norte: list, sur: list, centro: list, caba: list, lugar: str, dicc_zonas: dict) -> None:
     """
@@ -544,7 +516,7 @@ def zonas(geolocator, pedido: tuple, norte: list, sur: list, centro: list, caba:
     un str con la ubicacion (ciudad, provincia, pais) y un diccionario de zonas
     POST: no devuelve nada, solo modifica el diccionario de zonas
     """
-    datos = geolocator.geocode(lugar)
+    datos: location = geolocator.geocode(lugar)
     if abs(datos.latitude) < (35) and ("Ciudad Autónoma de Buenos Aires" not in datos.address):
         if lugar not in norte:
             norte.append(pedido)
@@ -640,6 +612,7 @@ def ciudades(dicc_zonas: dict, ciudades_norte: list, ciudades_sur: list, ciudade
 
     return [ciudades_norte, ciudades_sur, ciudades_centro, ciudades_caba]
 
+
 def ordenando_pedidos(pedidos) -> dict:
     """
     PRE: recibe un diccionario de pedidos
@@ -677,7 +650,7 @@ def imprimir_txt(recorrido: list, peso_por_zonas: dict, info_utilitarios: dict) 
         for linea in texto:
             if (type(linea) == list):
                 f.write("\n")
-                len_maximo = len(linea)
+                len_maximo: int = len(linea)
                 contador: int = 1
                 for mini_linea in linea:
                     f.write(mini_linea)
